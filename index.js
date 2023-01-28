@@ -1,6 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const indexRouter = require("./routes/index");
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+  ormErrorHandler,
+} = require("./middlewares/error.handler");
 
 const app = express();
 
@@ -18,6 +24,12 @@ const options = {
 app.use(express.json());
 app.use(cors(options));
 indexRouter(app);
+
+/* uso de middlewares de errores */
+app.use(logErrors);
+app.use(errorHandler);
+app.use(boomErrorHandler);
+app.use(ormErrorHandler);
 
 const port = process.env.PORT || 3000;
 
