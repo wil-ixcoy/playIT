@@ -3,7 +3,7 @@ const { password } = require("pg/lib/defaults");
 
 let id = joi.number().integer();
 let name = joi.string().min(3).max(30);
-let lastname = joi.string().min(3).max(30);
+let last_name = joi.string().min(3).max(30);
 let username = joi.string().min(3).max(20);
 let email = joi.string().email();
 let password = joi.string().min(8).max(30);
@@ -12,7 +12,7 @@ let country = joi.string();
 
 const createUserSchema = joi.object({
   name: name.required(),
-  lastname: lastname.required(),
+  last_name: last_name.required(),
   username: username.required(),
   email: email.required(),
   password: password.required(),
@@ -24,7 +24,8 @@ const getUserSchema = joi.object({
 
 const updateUserSchema = joi.object({
   name: name,
-  lastname: lastname,
+  last_name: last_name,
+  username:username,
   photo: photo,
   country: country,
 });
