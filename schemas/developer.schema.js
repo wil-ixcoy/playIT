@@ -15,13 +15,11 @@ let technologies = joi.array();
 let country = joi.string();
 
 /* campos que se pueden llenar despues */
-let photo = joi.string();
 let company = joi.string();
 
 /*  social, no requeridos al crear la cuenta*/
 let about = joi.string().min(25).max(200);
 let description = joi.string(40).max(800);
-let banner = joi.string();
 let web_page = joi.string();
 let youtube_channel = joi.string();
 let twitch_channel = joi.string();
@@ -54,7 +52,6 @@ const updateDeveloperSchema = joi.object({
   name: name,
   last_name: last_name,
   username: username,
-  photo: photo,
   years_experiencie: years_experiencie,
   job_availability: job_availability,
   date_of_birth: date_of_birth,
@@ -62,7 +59,6 @@ const updateDeveloperSchema = joi.object({
   country: country,
   about: about,
   description: description,
-  banner: banner,
   web_page: web_page,
   youtube_channel: youtube_channel,
   twitch_channel: twitch_channel,

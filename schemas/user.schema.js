@@ -7,7 +7,6 @@ let last_name = joi.string().min(3).max(30);
 let username = joi.string().min(3).max(20);
 let email = joi.string().email();
 let password = joi.string().min(8).max(30);
-let photo = joi.string();
 let country = joi.string();
 
 const createUserSchema = joi.object({
@@ -26,7 +25,6 @@ const updateUserSchema = joi.object({
   name: name,
   last_name: last_name,
   username:username,
-  photo: photo,
   country: country,
 });
 
