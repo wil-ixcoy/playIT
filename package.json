@@ -4,14 +4,20 @@
   "description": "api para playit, una especie de twitter, steam y google play",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node index.js",
+    "serve":"nodemon index.js",
+    "migrations:generate":"sequelize-cli migration:generate --name",
+    "migrations:revert":"sequelize-cli db:migrate:undo",
+    "migrations:delete":"sequelize:cli db:migrate:all"
   },
   "keywords": [
     "javascript",
     "nodejs",
     "sequelize",
     "postgres",
-    "docker"
+    "docker",
+    "azure",
+    "firebase"
   ],
   "author": "Wiliams Ixcoy",
   "license": "MIT",
