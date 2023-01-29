@@ -1,5 +1,4 @@
 const joi = require("joi");
-const { password } = require("pg/lib/defaults");
 
 let id = joi.number().integer();
 let name = joi.string().min(3).max(30);
