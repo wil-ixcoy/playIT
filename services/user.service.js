@@ -11,6 +11,7 @@ class UserService {
       password: hashPassword,
       role: "user",
     });
+    delete newUser.dataValues.password;
     return newUser;
   }
 
@@ -29,6 +30,29 @@ class UserService {
       delete user.dataValues.password;
     }
     return allUsers;
+  }
+
+  async update(id, data) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw boom.notFound("El usuario no existe");
+    } else {
+      const userUpdated = await user.update(data);
+      delete userUpdated.dataValues.password;
+      return userUpdated;
+    }
+  }
+
+  async delete(id) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw boom.notFound("El usuario no existe");
+    } else {
+      user.destroy();
+      return {
+        message: "Usuario eliminado",
+      };
+    }
   }
 }
 
