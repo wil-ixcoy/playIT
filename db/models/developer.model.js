@@ -10,16 +10,16 @@ const DeveloperSchema = {
     allowNull: false,
     autoIncrement: true,
   },
-  user_id: {
+/*   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: USER_TABLE,
-      key: id,
+      key: "id",
     },
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
-  },
+  }, */
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -50,7 +50,7 @@ const DeveloperSchema = {
     allowNull: false,
   },
   job_availability: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
   },
   date_of_birth: {
@@ -58,7 +58,7 @@ const DeveloperSchema = {
     allowNull: false,
   },
   technologies: {
-    type: DataTypes.ARRAY,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
   },
 
@@ -124,9 +124,9 @@ const DeveloperSchema = {
 
 class Developer extends Model {
   static associate(models) {
-    this.belongsTo(models.User, {
+/*     this.belongsTo(models.User, {
       as: "user",
-    });
+    }); */
   }
   static config(sequelize) {
     return {
@@ -143,3 +143,4 @@ module.exports = {
   DeveloperSchema,
   DEVELOPER_TABLE,
 };
+DeveloperSchema

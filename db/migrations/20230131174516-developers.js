@@ -2,7 +2,7 @@
 const {
   DEVELOPER_TABLE,
   DeveloperSchema,
-} = require("./20230131174516-developers");
+} = require("../models/developer.model");
 module.exports = {
   async up(queryInterface) {
     await queryInterface.createTable(DEVELOPER_TABLE, DeveloperSchema);

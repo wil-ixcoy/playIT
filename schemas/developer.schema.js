@@ -1,16 +1,16 @@
 const joi = require("joi");
 
 let id = joi.number().integer();
-
+let userId = joi.number().integer();
 /* campos requeridos al crear la cuenta */
 let name = joi.string().min(3).max(30);
 let last_name = joi.string().min(3).max(30);
 let username = joi.string().min(3).max(20);
 let email = joi.string().email();
 let years_experiencie = joi.number().integer();
-let job_availability = joi.array();
+let job_availability = joi.array().items(joi.string());
 let date_of_birth = joi.date();
-let technologies = joi.array();
+let technologies = joi.array().items(joi.string());
 let country = joi.string();
 
 /* campos que se pueden llenar despues */
@@ -18,7 +18,7 @@ let company = joi.string();
 
 /*  social, no requeridos al crear la cuenta*/
 let about = joi.string().min(25).max(200);
-let description = joi.string(40).max(800);
+let description = joi.string().min(40).max(800);
 let web_page = joi.string();
 let youtube_channel = joi.string();
 let twitch_channel = joi.string();
@@ -31,8 +31,8 @@ let twitter_profile = joi.string();
 let tiktok_profile = joi.string();
 
 const createDeveloperSchema = joi.object({
-  id:id.required(),
-  name: name.required(),
+  /*   userId: userId.required(),
+   */ name: name.required(),
   last_name: last_name.required(),
   username: username.required(),
   email: email.required(),
