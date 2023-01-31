@@ -1,4 +1,5 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
+const { USER_TABLE } = require("./user.model");
 
 const DEVELOPER_TABLE = "developers";
 
@@ -7,6 +8,17 @@ const DeveloperSchema = {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
+    autoIncrement: true,
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: USER_TABLE,
+      key: id,
+    },
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
   },
   name: {
     type: DataTypes.STRING,
@@ -111,7 +123,11 @@ const DeveloperSchema = {
 };
 
 class Developer extends Model {
-  static associate(models) {}
+  static associate(models) {
+    this.belongsTo(models.User, {
+      as: "user",
+    });
+  }
   static config(sequelize) {
     return {
       sequelize,
