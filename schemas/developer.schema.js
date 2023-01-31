@@ -14,7 +14,6 @@ let technologies = joi.array().items(joi.string());
 let country = joi.string();
 let password = joi.string().min(8).max(30);
 
-
 /* campos que se pueden llenar despues */
 let company = joi.string();
 
@@ -42,8 +41,20 @@ const createDeveloperSchema = joi.object({
   date_of_birth: date_of_birth.required(),
   technologies: technologies.required(),
   country: country.required(),
-  userId: userId,
-  password:password,
+  password: password.required(),
+});
+
+const updateDeveloperProfileSchema = joi.object({
+  name: name.required(),
+  last_name: last_name.required(),
+  username: username.required(),
+  email: email.required(),
+  years_experiencie: years_experiencie.required(),
+  job_availability: job_availability.required(),
+  date_of_birth: date_of_birth.required(),
+  technologies: technologies.required(),
+  country: country.required(),
+  userId: userId.required(),
 });
 
 const getDeveloperSchema = joi.object({
@@ -77,4 +88,5 @@ module.exports = {
   createDeveloperSchema,
   getDeveloperSchema,
   updateDeveloperSchema,
+  updateDeveloperProfileSchema,
 };

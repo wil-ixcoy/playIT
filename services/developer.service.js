@@ -7,28 +7,29 @@ const userService = new UserService();
 class DeveloperService {
   async create(data) {
     let rol = "developer";
-    if (data.password) {
-      let user = {
-        name: data.name,
-        last_name: data.last_name,
-        username: data.username,
-        email: data.email,
-        password: data.password,
-        country: data.country,
-        role: rol,
-      };
-      const userCreate = await userService.create(user);
-      const newDev = await models.Developer.create({
-        ...data,
-        userId: userCreate.id,
-      });
-      return newDev;
+    let user = {
+      name: data.name,
+      last_name: data.last_name,
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      country: data.country,
+      role: rol,
+    };
+    const userCreate = await userService.create(user);
+    await userService.update(userCreate.id, { role: rol });
+    const newDev = await models.Developer.create({
+      ...data,
+      userId: userCreate.id,
+    });
+    return newDev;
+  }
 
-    } else {
-      await userService.update(data.userId, { role: rol });
-      const newDev = await models.Developer.create(data);
-      return newDev;
-    }
+  async updateDevProfile(data) {
+    let rol = "developer";
+    await userService.update(data.userId, { role: rol });
+    const newDev = await models.Developer.create(data);
+    return newDev;
   }
 
   async findOne(id) {
@@ -52,7 +53,7 @@ class DeveloperService {
       return newData;
     }
   }
-  async delte(id) {
+  async delete(id) {
     const Developer = await this.findOne(id);
     if (!Developer) {
       throw boom.notFound("El Developer no existe");
