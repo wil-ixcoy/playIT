@@ -7,7 +7,6 @@ let name = joi.string().min(3).max(30);
 let last_name = joi.string().min(3).max(30);
 let username = joi.string().min(3).max(20);
 let email = joi.string().email();
-let password = joi.string().min(8).max(30);
 let years_experiencie = joi.number().integer();
 let job_availability = joi.array();
 let date_of_birth = joi.date();
@@ -32,11 +31,11 @@ let twitter_profile = joi.string();
 let tiktok_profile = joi.string();
 
 const createDeveloperSchema = joi.object({
+  id:id.required(),
   name: name.required(),
   last_name: last_name.required(),
   username: username.required(),
   email: email.required(),
-  password: password.required(),
   years_experiencie: years_experiencie.required(),
   job_availability: job_availability.required(),
   date_of_birth: date_of_birth.required(),
