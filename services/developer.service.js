@@ -1,15 +1,34 @@
 const boom = require("@hapi/boom");
 const { models } = require("../libs/sequelize");
+const UserService = require("./user.service");
+
+const userService = new UserService();
 
 class DeveloperService {
   async create(data) {
     let rol = "developer";
-    const newDev = await models.Developer.create({
-      ...data,
-      role: rol,
-    });
+    if (data.password) {
+      let user = {
+        name: data.name,
+        last_name: data.last_name,
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        country: data.country,
+        role: rol,
+      };
+      const userCreate = await userService.create(user);
+      const newDev = await models.Developer.create({
+        ...data,
+        userId: userCreate.id,
+      });
+      return newDev;
 
-    return newDev;
+    } else {
+      await userService.update(data.userId, { role: rol });
+      const newDev = await models.Developer.create(data);
+      return newDev;
+    }
   }
 
   async findOne(id) {

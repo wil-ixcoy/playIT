@@ -11,9 +11,11 @@ const {
   updateDeveloperSchema,
 } = require("../schemas/developer.schema");
 
+
 const router = express.Router();
 
-router.post("/create",
+router.post(
+  "/create",
   validatorHandler(createDeveloperSchema, "body"),
   async (req, res, next) => {
     try {
@@ -26,16 +28,13 @@ router.post("/create",
     }
   }
 );
-router.get("/",
-  async (req, res, next) => {
-    try {
-
-      const newDev = await devService.findAll();
-      res.json(newDev);
-    } catch (e) {
-      next(e);
-    }
+router.get("/", async (req, res, next) => {
+  try {
+    const newDev = await devService.findAll();
+    res.json(newDev);
+  } catch (e) {
+    next(e);
   }
-);
+});
 
 module.exports = router;

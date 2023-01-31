@@ -42,10 +42,6 @@ const DeveloperSchema = {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  role: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   years_experiencie: {
     type: DataTypes.INTEGER,
     allowNull: false,
