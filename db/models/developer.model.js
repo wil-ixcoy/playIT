@@ -10,16 +10,17 @@ const DeveloperSchema = {
     allowNull: false,
     autoIncrement: true,
   },
-/*   user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: "user_id",
     references: {
       model: USER_TABLE,
       key: "id",
     },
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
-  }, */
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -124,9 +125,9 @@ const DeveloperSchema = {
 
 class Developer extends Model {
   static associate(models) {
-/*     this.belongsTo(models.User, {
+    this.belongsTo(models.User, {
       as: "user",
-    }); */
+    });
   }
   static config(sequelize) {
     return {
@@ -143,4 +144,4 @@ module.exports = {
   DeveloperSchema,
   DEVELOPER_TABLE,
 };
-DeveloperSchema
+DeveloperSchema;

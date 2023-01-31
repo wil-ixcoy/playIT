@@ -31,8 +31,7 @@ let twitter_profile = joi.string();
 let tiktok_profile = joi.string();
 
 const createDeveloperSchema = joi.object({
-  /*   userId: userId.required(),
-   */ name: name.required(),
+  name: name.required(),
   last_name: last_name.required(),
   username: username.required(),
   email: email.required(),
@@ -41,6 +40,7 @@ const createDeveloperSchema = joi.object({
   date_of_birth: date_of_birth.required(),
   technologies: technologies.required(),
   country: country.required(),
+  userId: userId.required(),
 });
 
 const getDeveloperSchema = joi.object({
