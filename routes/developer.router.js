@@ -52,4 +52,33 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get(
+  "/:id",
+  validatorHandler(getDeveloperSchema, "params"),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const getDev = await devService.findOne(id);
+      res.json(getDev);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+router.patch(
+  "/update/:id",
+  validatorHandler(getDeveloperSchema, "params"),
+  validatorHandler(updateDeveloperSchema, "body"),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+      const dev = await devService.update(id, data);
+      res.json(dev);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
 module.exports = router;

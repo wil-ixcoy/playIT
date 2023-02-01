@@ -40,28 +40,33 @@ class DeveloperService {
       return dev;
     }
   }
+
   async findAll() {
     const allDevs = await models.Developer.findAll();
     return allDevs;
   }
+
   async update(id, data) {
-    const Developer = await this.findOne(id);
-    if (!Developer) {
+    const Dev = await this.findOne(id);
+
+    if (!Dev) {
       throw boom.notFound("El Developer no existe");
     } else {
-      const newData = await Developer.update(data);
-      return newData;
-    }
-  }
-  async delete(id) {
-    const Developer = await this.findOne(id);
-    if (!Developer) {
-      throw boom.notFound("El Developer no existe");
-    } else {
-      Developer.destroy();
-      return {
-        message: "Developer eliminado",
-      };
+      let idUser = Dev.userId;
+      if (data.name || data.last_name || data.username || data.country) {
+        const user = {
+          name: data.name || Dev.name,
+          last_name: data.last_name || Dev.last_name,
+          username: data.username || Dev.username,
+          country: data.country || Dev.country,
+        };
+        await userService.update(idUser, user);
+        const updateDev = await Dev.update(data);
+        return updateDev;
+      } else {
+        const newData = await Dev.update(data);
+        return newData;
+      }
     }
   }
 }
