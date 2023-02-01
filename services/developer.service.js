@@ -55,17 +55,24 @@ class DeveloperService {
       let idUser = Dev.userId;
       if (data.name || data.last_name || data.username || data.country) {
         const user = {
-          name: data.name || Dev.name,
-          last_name: data.last_name || Dev.last_name,
-          username: data.username || Dev.username,
-          country: data.country || Dev.country,
+          name: data.name,
+          last_name: data.last_name,
+          username: data.username,
+          country: data.country,
         };
-        await userService.update(idUser, user);
+        const updateUser = await userService.update(idUser, user);
         const updateDev = await Dev.update(data);
-        return updateDev;
+        return {
+          updateUser,
+          updateDev,
+        };
       } else {
+        const getUser = await userService.findOne(idUser);
         const newData = await Dev.update(data);
-        return newData;
+        return {
+          getUser,
+          newData,
+        };
       }
     }
   }
