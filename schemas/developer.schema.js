@@ -45,15 +45,11 @@ const createDeveloperSchema = joi.object({
 });
 
 const updateDeveloperProfileSchema = joi.object({
-  name: name.required(),
-  last_name: last_name.required(),
-  username: username.required(),
   email: email.required(),
   years_experiencie: years_experiencie.required(),
   job_availability: job_availability.required(),
   date_of_birth: date_of_birth.required(),
   technologies: technologies.required(),
-  country: country.required(),
   userId: userId.required(),
 });
 
