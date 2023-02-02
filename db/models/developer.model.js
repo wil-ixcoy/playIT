@@ -124,4 +124,3 @@ module.exports = {
   DeveloperSchema,
   DEVELOPER_TABLE,
 };
-DeveloperSchema;
