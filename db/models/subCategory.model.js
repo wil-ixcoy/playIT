@@ -51,7 +51,7 @@ class SubCategory extends Model {
       sequelize,
       tableName: SUBCATEGORY_TABLE,
       timestamps: false,
-      modelName: "Category",
+      modelName: "SubCategory",
     };
   }
 }
