@@ -43,7 +43,7 @@ const SubCategorySchema = {
 class SubCategory extends Model {
   static associate(models) {
     this.belongsTo(models.Category, {
-      as: "Category",
+      as: "category",
     });
   }
   static config(sequelize) {

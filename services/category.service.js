@@ -11,7 +11,7 @@ class CategoryService {
     return allCategories;
   }
   async findOne(id) {
-    const category = await models.Category.findByPk(id);
+    const category = await models.Category.findByPk(id,{include:["subCategories"]});
     if (!category) {
       throw boom.notFound("La categoria no existe");
     } else {
