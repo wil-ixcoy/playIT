@@ -13,7 +13,7 @@ const service = new UserService();
 const router = express.Router();
 
 router.post(
-  "/create",
+  "/user/create",
   validatorHandler(createUserSchema, "body"),
   async (req, res, next) => {
     try {
@@ -27,7 +27,7 @@ router.post(
 );
 
 router.get(
-  "/:id",
+  "/user/:id",
   validatorHandler(getUserSchema, "params"),
   async (req, res, next) => {
     try {
@@ -49,22 +49,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get(
-  "/:id",
-  validatorHandler(getUserSchema, "params"),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const user = await service.findOne(id);
-      res.json(user);
-    } catch (e) {
-      next(e);
-    }
-  }
-);
-
 router.patch(
-  "/update/:id",
+  "/user/update/:id",
   validatorHandler(getUserSchema, "params"),
   validatorHandler(updateUserSchema, "body"),
   async (req, res, next) => {
@@ -80,7 +66,7 @@ router.patch(
 );
 
 router.delete(
-  "/delete/:id",
+  "/user/delete/:id",
   validatorHandler(getUserSchema, "params"),
   async (req, res, next) => {
     try {

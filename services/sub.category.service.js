@@ -1,7 +1,7 @@
 const boom = require("@hapi/boom");
 const { models } = require("../libs/sequelize");
 
-class CategoryService {
+class SubCategoryService {
   async create(data) {
     const subCategory = await models.SubCategory.create(data);
     return subCategory;
@@ -32,3 +32,5 @@ class CategoryService {
     };
   }
 }
+
+module.exports = SubCategoryService;

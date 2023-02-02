@@ -1,7 +1,7 @@
 const joi = require("joi");
 
 let id = joi.number().integer();
-let categoryId = joi.number.integer();
+let categoryId = joi.number().integer();
 let name = joi.string().min(3).max(30);
 let description = joi.string().min(25).max(140);
 

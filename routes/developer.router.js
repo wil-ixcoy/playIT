@@ -15,7 +15,7 @@ const {
 const router = express.Router();
 
 router.post(
-  "/create",
+  "/developer/create",
   validatorHandler(createDeveloperSchema, "body"),
   async (req, res, next) => {
     try {
@@ -30,7 +30,7 @@ router.post(
 );
 
 router.post(
-  "/updateProfile",
+  "/developer/updateProfile",
   validatorHandler(updateDeveloperProfileSchema, "body"),
   async (req, res, next) => {
     try {
@@ -53,7 +53,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get(
-  "/:id",
+  "/developer/:id",
   validatorHandler(getDeveloperSchema, "params"),
   async (req, res, next) => {
     try {
@@ -66,7 +66,7 @@ router.get(
   }
 );
 router.patch(
-  "/update/:id",
+  "/developer/update/:id",
   validatorHandler(getDeveloperSchema, "params"),
   validatorHandler(updateDeveloperSchema, "body"),
   async (req, res, next) => {
