@@ -42,6 +42,10 @@ class Post extends Model {
       as: "subCategories",
       foreignKey: "categoryId",
     }); */
+
+    this.belongsTo(models.User, {
+      as: "user",
+    });
   }
   static config(sequelize) {
     return {

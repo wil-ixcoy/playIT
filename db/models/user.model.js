@@ -51,6 +51,10 @@ class User extends Model {
       as: "dev",
       foreignKey: "userId",
     });
+    this.hasMany(models.Post, {
+      as: "posts",
+      foreignKey: "userId",
+    });
   }
   static config(sequelize) {
     return {
