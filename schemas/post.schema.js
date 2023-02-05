@@ -1,12 +1,12 @@
 const joi = require("joi");
 
 let id = joi.number().integer();
-let user_id = joi.number().integer();
-let content = joi.string().max(140);
+let userId = joi.number().integer();
+let content = joi.string().max(160);
 
 const createPostSchema = joi.object({
   content: content.required(),
-  user_id: user_id.required(),
+  userId: userId.required(),
 });
 
 const getPostSchema = joi.object({
