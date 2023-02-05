@@ -3,6 +3,7 @@ const UserRouter = require("./user.router");
 const DevRouter = require("./developer.router");
 const CategoryRouter = require("./category.router");
 const SubCategoryRouter = require("./sub.category.router");
+const PostRouter = require("./post.router");
 
 function indexRouter(app) {
   const router = express.Router();
@@ -11,6 +12,7 @@ function indexRouter(app) {
   router.use("/developers", DevRouter);
   router.use("/categories", CategoryRouter);
   router.use("/sub-categories", SubCategoryRouter);
+  router.use("/posts", PostRouter);
 }
 
 module.exports = indexRouter;
