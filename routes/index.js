@@ -4,6 +4,7 @@ const DevRouter = require("./developer.router");
 const CategoryRouter = require("./category.router");
 const SubCategoryRouter = require("./sub.category.router");
 const PostRouter = require("./post.router");
+const ComentaryRouter = require("./comentary.router");
 
 function indexRouter(app) {
   const router = express.Router();
@@ -13,6 +14,7 @@ function indexRouter(app) {
   router.use("/categories", CategoryRouter);
   router.use("/sub-categories", SubCategoryRouter);
   router.use("/posts", PostRouter);
+  router.use("/comments", ComentaryRouter);
 }
 
 module.exports = indexRouter;

@@ -11,7 +11,7 @@ class PostService {
     return allPosts;
   }
   async findOne(id) {
-    const post = await models.Post.findByPk(id, { include: ["user"] });
+    const post = await models.Post.findByPk(id, { include: ["user","comentaries"] });
     if (!post) {
       throw boom.notFound("El post no existe");
     } else {

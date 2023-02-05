@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
+const { POST_TABLE } = require("./post.model");
 const { USER_TABLE } = require("./user.model");
+const COMENTARY_TABLE = "Comentaries";
 
-const POST_TABLE = "posts";
-
-const PostSchema = {
+const ComentarySchema = {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -16,6 +16,17 @@ const PostSchema = {
     field: "user_id",
     references: {
       model: USER_TABLE,
+      key: "id",
+    },
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  },
+  postId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: "post_id",
+    references: {
+      model: POST_TABLE,
       key: "id",
     },
     onUpdate: "CASCADE",
@@ -36,29 +47,27 @@ const PostSchema = {
   },
 };
 
-class Post extends Model {
+class Comentary extends Model {
   static associate(models) {
-    this.hasMany(models.Comentary, {
-      as: "comentaries",
-      foreignKey: "postId",
-    });
-
     this.belongsTo(models.User, {
       as: "user",
+    });
+    this.belongsTo(models.Post, {
+      as: "post",
     });
   }
   static config(sequelize) {
     return {
       sequelize,
-      tableName: POST_TABLE,
+      tableName: COMENTARY_TABLE,
       timestamps: false,
-      modelName: "Post",
+      modelName: "Comentary",
     };
   }
 }
 
 module.exports = {
-  POST_TABLE,
-  PostSchema,
-  Post,
+  COMENTARY_TABLE,
+  ComentarySchema,
+  Comentary,
 };

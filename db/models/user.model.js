@@ -55,6 +55,10 @@ class User extends Model {
       as: "posts",
       foreignKey: "userId",
     });
+    this.hasMany(models.Comentary, {
+      as: "comentary",
+      foreignKey: "userId",
+    });
   }
   static config(sequelize) {
     return {
