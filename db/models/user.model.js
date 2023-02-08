@@ -38,6 +38,10 @@ const UserSchema = {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  profile_picture: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

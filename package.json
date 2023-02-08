@@ -4,12 +4,12 @@
   "description": "api para playit, una especie de twitter, steam y google play",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
-    "serve":"nodemon index.js",
-    "migrations:generate":"sequelize-cli migration:generate --name",
+    "start": "node index.js",
+    "serve": "nodemon index.js",
+    "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
-    "migrations:revert":"sequelize-cli db:migrate:undo",
-    "migrations:delete":"sequelize-cli db:migrate:all"
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:all"
   },
   "keywords": [
     "javascript",
@@ -28,13 +28,19 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^11.1.0",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
+    "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.9.0",
     "sequelize": "^6.28.0",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "sharp": "^0.31.3",
+    "uuid-v4": "^0.1.0"
   }
 }
