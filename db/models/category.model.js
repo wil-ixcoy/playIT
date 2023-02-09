@@ -18,7 +18,7 @@ const CategorySchema = {
     allowNull: false,
   },
   cover_photo: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(1234),
     allowNull: true,
   },
   created_at: {

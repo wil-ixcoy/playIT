@@ -19,12 +19,12 @@ const uploadImageHandler = multer({
 
 /* sharp */
 
-const helperImage = async (filePat, fileName) => {
+const helperImage = async (filePat, fileName, width, height) => {
   const extension = filePat.split(".").pop();
   const resize = await sharp(filePat)
     .resize({
-      width: 50,
-      height: 50,
+      width: width,
+      height: height,
     })
     .toFile(
       path.join(__dirname, `../images/sharp/resized-${fileName}.${extension}`)
@@ -33,7 +33,7 @@ const helperImage = async (filePat, fileName) => {
     __dirname,
     `../images/sharp/resized-${fileName}.${extension}`
   );
-  
+
   const fileInfo = fs.statSync(filePath);
   const responseObject = {
     fieldname: "file",

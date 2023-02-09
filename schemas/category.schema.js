@@ -6,12 +6,12 @@ let description = joi.string().min(25).max(140);
 
 
 const createCategorySchema = joi.object({
-  name: name.required(),
-  description: description.required(),
+  name: name,
+  description: description,
 });
 
 const getCategorySchema = joi.object({
-  id: id.required(),
+  id: id,
 });
 
 const updateCategorySchema = joi.object({

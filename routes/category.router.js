@@ -20,24 +20,23 @@ const firebaseService = new FirebaseService();
 
 router.post(
   "/category/create",
-  /*   validatorHandler(createCategorySchema, "body"),
-   */
+  validatorHandler(createCategorySchema, "body"),
   uploadImageHandler.single("file"),
   async (req, res, next) => {
-    const imageResize = await helperImage(
-      req.file.path,
-      `${req.body.name}`
-    );
-    const url = await firebaseService.uploadCoverCategory(req.body.name,imageResize);
+
+    const imageResize = await helperImage(req.file.path, `${req.body.name}`, 100, 100);
+
+    const url = await firebaseService.uploadCoverCategory(req.body.name, imageResize);
+
     const data = {
       name: req.body.name,
       description: req.body.description,
       cover_photo: url,
     };
-        const category = await service.create(data);
-        await fs.unlink(req.file.path)
-        await fs.unlink(imageResize.path)
-     res.json(category);
+    await fs.unlink(req.file.path);
+    await fs.unlink(imageResize.path);
+    const category = await service.create(data);
+    res.json(category);
     try {
     } catch (e) {
       next(e);
@@ -59,7 +58,7 @@ router.get(
   validatorHandler(getCategorySchema, "params"),
   async (req, res, next) => {
     try {
-      const { id } = req.body.params;
+      const { id } = req.params;
       const getCategory = await service.findOne(id);
       res.json(getCategory);
     } catch (e) {
