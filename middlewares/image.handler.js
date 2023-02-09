@@ -45,7 +45,6 @@ const helperImage = async (filePat, fileName, width, height) => {
     path: filePath,
     size: fileInfo.size,
   };
-  console.log(responseObject);
   return responseObject;
 };
 

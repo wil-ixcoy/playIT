@@ -27,12 +27,12 @@ router.post(
     const imageResize = await helperImage(req.file.path, `${req.body.name}`, 100, 100);
 
     const url = await firebaseService.uploadCoverCategory(req.body.name, imageResize);
-
     const data = {
       name: req.body.name,
       description: req.body.description,
       cover_photo: url,
     };
+    
     await fs.unlink(req.file.path);
     await fs.unlink(imageResize.path);
     const category = await service.create(data);

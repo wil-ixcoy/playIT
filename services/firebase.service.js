@@ -1,5 +1,6 @@
 const boom = require("@hapi/boom");
 const { storage } = require("../libs/firebase");
+const bucket = storage.bucket("gs://playit-f3631.appspot.com/");
 
 class FirebaseService {
   async uploadProfilePictureDeveloper() {}
@@ -7,31 +8,20 @@ class FirebaseService {
   async uploadImagePost() {}
 
   async uploadCoverCategory(category, image) {
-    const bucket = storage.bucket("gs://playit-f3631.appspot.com/");
+    try {
+      const extension = image.originalname.split(".").pop();
 
-    const extension = image.originalname.split(".").pop();
-
-    const newImage = await bucket.upload(image.path, {
-      destination: `category/${category}.${extension}`,
-      resumable: true,
-    });
-    const file = await bucket.file(`category/${category}.${extension}`);
-    const urlImage = await file.getSignedUrl({
-      action: "read",
-      expires: "01-01-2130",
-    });
-    console.log(urlImage);
-    console.log(urlImage[0]);
-    return urlImage[0];
+      const newImage = await bucket.upload(image.path, {
+        destination: `category/${category}.${extension}`,
+        resumable: true,
+      });
+      const url = `https://storage.googleapis.com/${bucket.name}/${newImage[0].name}`;
+      return url;
+    } catch (e) {
+      boom.badRequest(e)
+    }
   }
-  async uploadCoverSubCategory() {}
+
+  async uploadCoverSubCategory(file) {}
 }
 module.exports = FirebaseService;
-/*   const file = await bucket.file(`category/${category}.${extension}`);
-    const urlImage = await file.getSignedUrl({
-      action: "read",
-      expires: "01-01-2130",
-    });
-    console.log(urlImage);
-    console.log(urlImage[0]);
-    return urlImage[0]; */
