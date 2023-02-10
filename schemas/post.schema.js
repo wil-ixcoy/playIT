@@ -5,12 +5,12 @@ let userId = joi.number().integer();
 let content = joi.string().max(160);
 
 const createPostSchema = joi.object({
-  content: content.required(),
-  userId: userId.required(),
+  content: content,
+  userId: userId,
 });
 
 const getPostSchema = joi.object({
-  id: id.required(),
+  id: id,
 });
 
 const updatePostSchema = joi.object({

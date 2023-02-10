@@ -1,21 +1,41 @@
 const express = require("express");
+const fs = require("fs-extra");
 const PostService = require("../services/post.service");
+const FirebaseService = require("../services/firebase.service");
 const {
   createPostSchema,
   getPostSchema,
   updatePostSchema,
 } = require("../schemas/post.schema");
+const {
+  uploadImageHandler,
+  helperImage,
+} = require("../middlewares/image.handler");
 const validatorHandler = require("../middlewares/validator.handler");
 
 const service = new PostService();
+const firebaseService = new FirebaseService();
 const router = express.Router();
 
 router.post(
   "/post/create",
   validatorHandler(createPostSchema, "body"),
+  uploadImageHandler.single("file"),
   async (req, res, next) => {
     try {
-      const data = req.body;
+      let randomName = Math.random().toString(36).substring(7);
+
+      const imageResize = await helperImage(req.file.path, randomName, 1080, 1080);
+      const url = await firebaseService.uploadImagePost(randomName,imageResize);
+
+      const data = {
+        userId:req.body.userId,
+        content: req.body.content,
+        photo: url,
+      };
+  
+      await fs.unlink(req.file.path);
+      await fs.unlink(imageResize.path);
       const newPost = await service.create(data);
       res.json(newPost);
     } catch (e) {
