@@ -10,18 +10,35 @@ class FirebaseService {
   async uploadCoverCategory(category, image) {
     try {
       const extension = image.originalname.split(".").pop();
-
-      const newImage = await bucket.upload(image.path, {
-        destination: `category/${category}.${extension}`,
+      let nombre = category.split(" ").join("_")
+      
+      const uploadImage = await bucket.upload(image.path, {
+        destination: `category/${nombre}.${extension}`,
         resumable: true,
       });
-      const url = `https://storage.googleapis.com/${bucket.name}/${newImage[0].name}`;
+      const url = `https://storage.googleapis.com/${bucket.name}/${uploadImage[0].name}`;
       return url;
     } catch (e) {
-      boom.badRequest(e)
+      boom.badRequest(e);
     }
   }
 
-  async uploadCoverSubCategory(file) {}
+  async uploadCoverSubCategory(subCategory, image) {
+    try {
+      const extension = image.originalname.split(".").pop();
+
+      let nombre = subCategory.split(" ").join("_")
+      
+
+      const uploadImage = await bucket.upload(image.path, {
+        destination: `sub_category/${nombre}.${extension}`,
+        resumable: true,
+      });
+      const url = `https://storage.googleapis.com/${bucket.name}/${uploadImage[0].name}`;
+      return url;
+    } catch (e) {
+      boom.badRequest(e);
+    }
+  }
 }
 module.exports = FirebaseService;

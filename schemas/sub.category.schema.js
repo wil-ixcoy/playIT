@@ -7,9 +7,9 @@ let description = joi.string().min(25).max(140);
 
 
 const createSubCategorySchema = joi.object({
-  name: name.required(),
-  description: description.required(),
-  categoryId: categoryId.required(),
+  name: name,
+  description: description,
+  categoryId: categoryId,
 });
 
 const getSubCategorySchema = joi.object({

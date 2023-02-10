@@ -73,8 +73,8 @@ router.patch(
   validatorHandler(updateCategorySchema, "body"),
   async (req, res, next) => {
     try {
-      const { id } = req.body.params;
-      const data = req.body.body;
+      const { id } = req.params;
+      const data = req.body;
       const updateCategory = await service.update(id, data);
       res.json(updateCategory);
     } catch (e) {
@@ -88,7 +88,7 @@ router.delete(
   validatorHandler(getCategorySchema, "params"),
   async (req, res, next) => {
     try {
-      const { id } = req.body.params;
+      const { id } = req.params;
       const deleteCategory = await service.delete(id);
       res.json(deleteCategory);
     } catch (e) {
