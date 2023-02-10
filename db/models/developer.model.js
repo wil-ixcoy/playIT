@@ -108,6 +108,10 @@ class Developer extends Model {
     this.belongsTo(models.User, {
       as: "user",
     });
+    this.hasMany(models.App, {
+      as: "apps",
+      foreignKey: "developerId",
+    });
   }
   static config(sequelize) {
     return {

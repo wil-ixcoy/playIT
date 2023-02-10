@@ -45,6 +45,10 @@ class SubCategory extends Model {
     this.belongsTo(models.Category, {
       as: "category",
     });
+    this.hasMany(models.App, {
+      as: "apps",
+      foreignKey: "subcategoryId",
+    });
   }
   static config(sequelize) {
     return {

@@ -4,6 +4,7 @@ const { Category, CategorySchema } = require("./category.model");
 const { SubCategory, SubCategorySchema } = require("./subCategory.model");
 const { Post, PostSchema } = require("./post.model");
 const { Comentary, ComentarySchema } = require("./comentary.model");
+const { App, AppSchema } = require("./app.model");
 
 function setupModels(sequelize) {
   User.init(UserSchema, User.config(sequelize));
@@ -12,6 +13,7 @@ function setupModels(sequelize) {
   SubCategory.init(SubCategorySchema, SubCategory.config(sequelize));
   Post.init(PostSchema, Post.config(sequelize));
   Comentary.init(ComentarySchema, Comentary.config(sequelize));
+  App.init(AppSchema, App.config(sequelize));
 
   User.associate(sequelize.models);
   Developer.associate(sequelize.models);
@@ -19,6 +21,7 @@ function setupModels(sequelize) {
   SubCategory.associate(sequelize.models);
   Post.associate(sequelize.models);
   Comentary.associate(sequelize.models);
+  App.associate(sequelize.models);
 }
 
 module.exports = { setupModels };

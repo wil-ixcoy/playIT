@@ -18,7 +18,7 @@ const CategorySchema = {
     allowNull: false,
   },
   cover_photo: {
-    type: DataTypes.STRING(1234),
+    type: DataTypes.STRING,
     allowNull: true,
   },
   created_at: {
@@ -30,10 +30,14 @@ const CategorySchema = {
 
 class Category extends Model {
   static associate(models) {
-    this.hasMany(models.SubCategory,{
-        as:"subCategories",
-        foreignKey:"categoryId"
-    })
+    this.hasMany(models.SubCategory, {
+      as: "subCategories",
+      foreignKey: "categoryId",
+    });
+    this.hasMany(models.App, {
+      as: "apps",
+      foreignKey: "categoryId",
+    });
   }
   static config(sequelize) {
     return {
