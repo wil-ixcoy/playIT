@@ -26,10 +26,10 @@ app.use(cors(options));
 indexRouter(app);
 
 /* uso de middlewares de errores */
-app.use(logErrors);
-app.use(errorHandler);
-app.use(boomErrorHandler);
 app.use(ormErrorHandler);
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
 
