@@ -49,17 +49,21 @@ const AppSchema = {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  developer_username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   icon: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   cover_photo: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   description: {
     type: DataTypes.STRING,
@@ -86,7 +90,7 @@ const AppSchema = {
   },
   download_link: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   language: {
     type: DataTypes.STRING,
