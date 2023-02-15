@@ -110,7 +110,7 @@ class Developer extends Model {
     });
     this.hasMany(models.App, {
       as: "apps",
-      foreignKey: "developerId",
+      foreignKey: "devId",
     });
   }
   static config(sequelize) {

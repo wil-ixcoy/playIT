@@ -12,7 +12,7 @@ const AppSchema = {
     autoIncrement: true,
     allowNull: false,
   },
-  developerId: {
+  devId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     field: "developer_id",
@@ -45,15 +45,17 @@ const AppSchema = {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   },
-  developer_name: {
+  devName: {
     type: DataTypes.STRING,
+    field:"dev_name",
     allowNull: false,
   },
-  developer_username: {
+  devUsername: {
     type: DataTypes.STRING,
+    field:"dv_username",
     allowNull: false,
   },
-  name: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -66,7 +68,7 @@ const AppSchema = {
     allowNull: true,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(900),
     allowNull: false,
   },
   platform: {
