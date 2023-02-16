@@ -56,7 +56,7 @@ class FirebaseService {
     }
   }
 
-  async uploadApp(nameApp, app, icon, cover) {
+    async uploadApp(nameApp, app, icon, cover) {
     try {
       const extensionApp = app.originalname.split(".").pop();
       const extensionIcon = icon.originalname.split(".").pop();
@@ -90,5 +90,24 @@ class FirebaseService {
       boom.badRequest(e);
     }
   }
+
+  async uploadAppImages(nameApp, image) {
+    try {
+      const extension = image.originalname.split(".").pop();
+
+      let nombre = nameApp.split(" ").join("_");
+
+      const uploaScreenshot = await bucket.upload(image.path, {
+        destination: `apps/${nombre}/screenshots/${nombre}-${Date.now()}-screenshot.${extension}`,
+        resumable: true,
+      });
+
+      const urlImage = `https://storage.googleapis.com/${bucket.name}/${uploaScreenshot[0].name}`;
+      return urlImage
+    } catch (e) {
+      boom.badRequest(e);
+    }
+  }
+
 }
 module.exports = FirebaseService;

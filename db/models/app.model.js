@@ -103,6 +103,10 @@ const AppSchema = {
     allowNull: false,
     defaultValue: 0,
   },
+  screenshots: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

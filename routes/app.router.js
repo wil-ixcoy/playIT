@@ -18,7 +18,7 @@ const firebaseService = new FirebaseService();
 
 const router = express.Router();
 
-router.post(
+/* router.post(
   "/app/create",
   uploadImageHandler.array("files", 13),
   validatorHandler(createAppSchema, "body"),
@@ -46,6 +46,42 @@ router.post(
       await fs.unlink(req.files[2].path);
       await fs.unlink(cover.path);
       await fs.unlink(icon.path);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+ */
+router.post(
+  "/app/create",
+  uploadImageHandler.array("files", 13),
+  validatorHandler(createAppSchema, "body"),
+  async (req, res, next) => {
+    try {
+      const reqData = req.body;
+
+      const files = req.files;
+
+      const firebaseLinks = await service.images(req.body.title, files);
+
+      /*  const icon = await helperImage(req.files[1].path, `${req.files[1].originalname}`, 150, 150);
+      const cover = await helperImage(req.files[2].path,`${req.files[2].originalname}`,1500,500);
+      
+      const Urls = await firebaseService.uploadApp(req.body.title, req.files[0], icon, cover); */
+      const data = {
+        ...reqData,
+        download_link: firebaseLinks.Urls.urlApp,
+        icon: firebaseLinks.Urls.urlIcon,
+        cover_photo: firebaseLinks.Urls.urlCover,
+        screenshots: firebaseLinks.links,
+      };
+
+      const newApp = await service.create(data);
+      res.json(newApp);
+
+      for (let i = 0; i < req.files.length; i++) {
+        await fs.unlink(req.files[i].path);
+      }
     } catch (e) {
       next(e);
     }
