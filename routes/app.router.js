@@ -20,14 +20,14 @@ const router = express.Router();
 
 router.post(
   "/app/create",
-  uploadImageHandler.array("files", 3),
+  uploadImageHandler.array("files", 13),
   validatorHandler(createAppSchema, "body"),
   async (req, res, next) => {
     try {
       const reqData = req.body;
 
       const icon = await helperImage(req.files[1].path, `${req.files[1].originalname}`, 150, 150);
-      const cover = await helperImage(req.files[2].path,`${req.files[2].originalname}`,800,500);
+      const cover = await helperImage(req.files[2].path,`${req.files[2].originalname}`,1500,500);
       
       const Urls = await firebaseService.uploadApp(req.body.title, req.files[0], icon, cover);
     
