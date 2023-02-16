@@ -5,13 +5,14 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, path.join(__dirname, "../images/multer"));
+    callback(null, path.join(__dirname, "../multimedia/images"));
   },
   filename: (req, file, callback) => {
     const extension = file.originalname.split(".").pop();
     callback(null, `${Date.now()}.${extension}`);
   },
 });
+
 
 const uploadImageHandler = multer({
   storage,
@@ -27,11 +28,11 @@ const helperImage = async (filePat, fileName, width, height) => {
       height: height,
     })
     .toFile(
-      path.join(__dirname, `../images/sharp/resized-${fileName}.${extension}`)
+      path.join(__dirname, `../multimedia/images_resized/resized-${fileName}.${extension}`)
     );
   let filePath = path.join(
     __dirname,
-    `../images/sharp/resized-${fileName}.${extension}`
+    `../multimedia/images_resized/resized-${fileName}.${extension}`
   );
 
   const fileInfo = fs.statSync(filePath);

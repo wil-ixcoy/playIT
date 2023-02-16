@@ -6,12 +6,11 @@ class FirebaseService {
   async uploadProfilePictureDeveloper() {}
   async uploadProfilePictureUser() {}
 
-  async uploadImagePost(post,image) {
+  async uploadImagePost(post, image) {
     try {
       const extension = image.originalname.split(".").pop();
 
-      let nombre = post.split(" ").join("_")
-      
+      let nombre = post.split(" ").join("_");
 
       const uploadImage = await bucket.upload(image.path, {
         destination: `posts/${nombre}.${extension}`,
@@ -27,8 +26,8 @@ class FirebaseService {
   async uploadCoverCategory(category, image) {
     try {
       const extension = image.originalname.split(".").pop();
-      let nombre = category.split(" ").join("_")
-      
+      let nombre = category.split(" ").join("_");
+
       const uploadImage = await bucket.upload(image.path, {
         destination: `category/${nombre}.${extension}`,
         resumable: true,
@@ -44,8 +43,7 @@ class FirebaseService {
     try {
       const extension = image.originalname.split(".").pop();
 
-      let nombre = subCategory.split(" ").join("_")
-      
+      let nombre = subCategory.split(" ").join("_");
 
       const uploadImage = await bucket.upload(image.path, {
         destination: `sub_category/${nombre}.${extension}`,
@@ -53,6 +51,44 @@ class FirebaseService {
       });
       const url = `https://storage.googleapis.com/${bucket.name}/${uploadImage[0].name}`;
       return url;
+    } catch (e) {
+      boom.badRequest(e);
+    }
+  }
+
+  async uploadApp(nameApp, app, icon, cover) {
+    try {
+      console.log(app);
+      console.log(icon);
+      console.log(cover);
+      const extensionApp = app.originalname.split(".").pop();
+      const extensionIcon = icon.originalname.split(".").pop();
+      const extensionCover = cover.originalname.split(".").pop();
+
+      let nombre = nameApp.split(" ").join("_");
+
+      const uploadApplication = await bucket.upload(app.path, {
+        destination: `apps/${nombre}/${nombre}-app.${extensionApp}`,
+        resumable: true,
+      });
+
+      const uploadIcon = await bucket.upload(icon.path, {
+        destination: `apps/${nombre}/${nombre}-icon.${extensionIcon}`,
+        resumable: true,
+      });
+
+      const uploadCover = await bucket.upload(cover.path, {
+        destination: `apps/${nombre}/${nombre}-cover.${extensionCover}`,
+        resumable: true,
+      });
+      const urlApp = `https://storage.googleapis.com/${bucket.name}/${uploadApplication[0].name}`;
+      const urlIcon = `https://storage.googleapis.com/${bucket.name}/${uploadIcon[0].name}`;
+      const urlCover = `https://storage.googleapis.com/${bucket.name}/${uploadCover[0].name}`;
+      return {
+        urlApp,
+        urlIcon,
+        urlCover,
+      };
     } catch (e) {
       boom.badRequest(e);
     }
