@@ -3,7 +3,6 @@ const AppService = require("../services/app.service");
 const FirebaseService = require("../services/firebase.service");
 const validatorHandler = require("../middlewares/validator.handler");
 const fs = require("fs-extra");
-const { uploadAppHandler } = require("../middlewares/app.handler");
 const {
   uploadImageHandler,
   helperImage,
@@ -21,7 +20,8 @@ const router = express.Router();
 
 router.post(
   "/app/create",
-  uploadImageHandler.array("files",3),
+  uploadImageHandler.array("files", 3),
+  validatorHandler(createAppSchema, "body"),
   async (req, res, next) => {
     try {
       const reqData = req.body;
@@ -40,7 +40,7 @@ router.post(
 
       const newApp = await service.create(data);
       res.json(newApp);
-      
+
       await fs.unlink(req.files[0].path);
       await fs.unlink(req.files[1].path);
       await fs.unlink(req.files[2].path);

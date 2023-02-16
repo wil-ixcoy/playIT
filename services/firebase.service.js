@@ -58,9 +58,6 @@ class FirebaseService {
 
   async uploadApp(nameApp, app, icon, cover) {
     try {
-      console.log(app);
-      console.log(icon);
-      console.log(cover);
       const extensionApp = app.originalname.split(".").pop();
       const extensionIcon = icon.originalname.split(".").pop();
       const extensionCover = cover.originalname.split(".").pop();
