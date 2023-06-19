@@ -76,7 +76,7 @@ class AppService {
 
       let link = await service.uploadAppImages(title, image);
       links.push(link);
-      console.log(image);
+      await fs.unlink(image.path)
     }
 
     await fs.unlink(icon.path);
